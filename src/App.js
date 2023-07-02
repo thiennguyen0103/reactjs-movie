@@ -1,23 +1,24 @@
-import './App.scss'
 import 'swiper/swiper.min.css';
-import './assets/boxicons/css/boxicons.min.css'
+import './App.scss';
+import './assets/boxicons/css/boxicons.min.css';
 
-import { BrowserRouter, Route } from 'react-router-dom';
-
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
-import Routes from './config/Routes';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Catalog from './pages/Catalog';
+import Home from './pages/Home';
+import Detail from './pages/detail/Detail';
+import Layout from './Layout/Layout';
 
 function App() {
   return (
     <BrowserRouter>
-      <Route render={props => (
-        <>
-          <Header {...props}/>
-          <Routes/>
-          <Footer/>
-        </>
-      )} />
+      <Routes>
+        <Route element={<Layout/>}>
+          <Route path="/" element={<Home />} />
+          <Route path="/:category/search/:keyword" element={<Catalog />} />
+          <Route path="/:category/:id" element={<Detail />} />
+          <Route path="/:category" element={<Catalog />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

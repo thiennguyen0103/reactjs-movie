@@ -21,14 +21,14 @@ const headerNav = [
 ];
 
 const Header = () => {
-    const { pathName } = useLocation(); // ##########
+    const { pathname } = useLocation();
     const headerRef = useRef(null);
 
-    const active = headerNav.findIndex(e => e.path === pathName);
+    const active = headerNav.findIndex(e => e.path === pathname);
 
     useEffect(() => {
         const shrinkHeader = () => {
-            if (document.body.scrolltop > 100 || document.documentElement.scrollTop > 100) {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 headerRef.current.classList.add('shrink')
             }
             else {

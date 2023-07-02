@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import './MovieGrid.scss';
-import MovieCard from '../movie-card/MovieCard';
-import { useParams } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import tmdbApi, { category, movieType, tvType } from '../../api/tmdbApi';
 import Button, { OutlineButton } from '../button/Button';
 import Input from '../input/Input';
-import { useHistory } from 'react-router-dom';
+import MovieCard from '../movie-card/MovieCard';
+import './MovieGrid.scss';
 
 const MovieGrid = props => {
 
@@ -87,17 +86,17 @@ const MovieGrid = props => {
 
 const MovieSearch = props => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [keyword, setKeyword] = useState(props.keyword ? props.keyword : '');
 
     const goToSearch = useCallback(
         () => {
             if (keyword.trim().length > 0) {
-                history.push(`/${category[props.category]}/search/${keyword}`);
+                navigate.push(`/${category[props.category]}/search/${keyword}`);
             }
         },
-        [keyword, props.category, history]
+        [keyword, props.category, navigate]
     );
 
     useEffect(() => {
